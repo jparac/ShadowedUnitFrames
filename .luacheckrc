@@ -43,6 +43,7 @@ read_globals = {
 	"RealMobHealth",
 
 	-- API functions
+	"C_AddOns",
 	"C_PartyInfo",
 	"C_Timer",
 	"CancelUnitBuff",
@@ -76,7 +77,6 @@ read_globals = {
 	"HasLFGRestrictions",
 	"HasPetUI",
 	"InCombatLockdown",
-	"IsAddOnLoaded",
 	"IsEveryoneAssistant",
 	"IsInInstance",
 	"IsPlayerSpell",
@@ -84,7 +84,6 @@ read_globals = {
 	"IsShiftKeyDown",
 	"IsUsableSpell",
 	"IsXPUserDisabled",
-	"LoadAddOn",
 	"UnitAffectingCombat",
 	"UnitAlternatePowerInfo",
 	"UnitAura",
