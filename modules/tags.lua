@@ -961,6 +961,18 @@ Tags.defaultTags = {
 
 		return UnitPower(unit, Enum.PowerType.Mana)
 	end]],
+	["abs:incabsorb"] = [[function(unit, unitOwner, fontString)
+	    local absorb = UnitGetTotalAbsorbs(unit)
+		return absorb and absorb > 0 and absorb
+	end]],
+	["incabsorb"] = [[function(unit, unitOwner, fontString)
+	    local absorb = UnitGetTotalAbsorbs(unit)
+		return absorb and absorb > 0 and ShadowUF:FormatLargeNumber(absorb)
+	end]],
+	["incabsorb:name"] = [[function(unit, unitOwner, fontString)
+	    local absorb = UnitGetTotalAbsorbs(unit)
+		return absorb and absorb > 0 and string.format("+%d", absorb) or ShadowUF.tagFunc.name(unit, unitOwner, fontString)
+	end]],
 	["unit:raid:targeting"] = [[function(unit, unitOwner, fontString)
 		if( GetNumGroupMembers() == 0 ) then return nil end
 		local guid = UnitGUID(unit)
@@ -1002,6 +1014,9 @@ Tags.defaultEvents = {
 	-- ["crtabs"]				= "CRTABS",
 	-- ["abs:crtabs"]			= "CRTABS",
 	-- ["crtabs:name"]			= "CRTABS",
+	["abs:incabsorb"]			= "UNIT_ABSORB_AMOUNT_CHANGED",
+	["incabsorb"]				= "UNIT_ABSORB_AMOUNT_CHANGED",
+	["incabsorb:name"]			= "UNIT_ABSORB_AMOUNT_CHANGED",
 	["afk"]						= "PLAYER_FLAGS_CHANGED", -- Yes, I know it's called PLAYER_FLAGS_CHANGED, but arg1 is the unit including non-players.
 	["afk:time"]				= "PLAYER_FLAGS_CHANGED UNIT_CONNECTION",
 	["status:time"]				= "UNIT_POWER_FREQUENT UNIT_CONNECTION",
@@ -1079,6 +1094,9 @@ Tags.defaultCategories = {
 	["totem:timer"]				= "classtimer",
 	["rune:timer"]				= "classtimer",
 	["hp:color"]				= "health",
+	["abs:incabsorb"]			= "health",
+	["incabsorb"]				= "health",
+	["incabsorb:name"]			= "health",
 	["smart:curmaxhp"]			= "health",
 	["smart:curmaxpp"]			= "health",
 	["afk"]						= "status",

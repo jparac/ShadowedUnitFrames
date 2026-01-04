@@ -228,7 +228,7 @@ local function setVariable(unit, moduleKey, moduleSubKey, key, value)
 end
 
 local function specialRestricted(unit, moduleKey, moduleSubKey, key)
-	if( ShadowUF.fakeUnits[unit] and ( key == "colorAggro" or key == "aggro" or key == "colorDispel" or moduleKey == "castBar" or moduleKey == "incHeal" ) ) then
+	if( ShadowUF.fakeUnits[unit] and ( key == "colorAggro" or key == "aggro" or key == "colorDispel" or moduleKey == "castBar" or moduleKey == "incHeal" or moduleKey == "incAbsorb" ) ) then
 		return true
 	elseif( moduleKey == "healthBar" and unit == "player" and key == "reaction" ) then
 		return true
@@ -312,7 +312,7 @@ local function hideRestrictedOption(info)
 	elseif( ( key == "incHeal" and not ShadowUF.modules.incHeal ) or ( key == "incAbsorb" and not ShadowUF.modules.incAbsorb ) or ( key == "healAbsorb" and not ShadowUF.modules.healAbsorb ) )  then
 		return true
 	-- Non-standard units do not support color by aggro or incoming heal
-	elseif( key == "colorAggro" or key == "colorDispel" or key == "aggro" ) then
+	elseif( key == "colorAggro" or key == "colorDispel" or key == "incAbsorb" or key == "aggro" ) then
 		return string.match(unit, "%w+target" )
 	-- Fall back for indicators, no variable table so it shouldn't be shown
 	elseif( info[#(info) - 1] == "indicators" ) then
@@ -1053,6 +1053,13 @@ local function loadGeneralOptions()
 								name = L["Incoming heal"],
 								desc = L["Bar color to use to show how much healing someone is about to receive."],
 								arg = "healthColors.inc",
+							},
+							incAbsorb = {
+								order = 9,
+								type = "color",
+								name = L["Incoming absorb"],
+								desc = L["Color to use to show how much damage will be absorbed."],
+								arg = "healthColors.incAbsorb",
 							},
 							enemyUnattack = {
 								order = 11,
@@ -3655,6 +3662,37 @@ local function loadUnitOptions()
 								values = {["none"] = L["Never (Disabled)"], ["player"] = L["Players only"], ["npc"] = L["NPCs only"], ["both"] = L["Both"]},
 								hidden = function(info) return info[2] == "player" or info[2] == "pet" end,
 							}
+						},
+					},
+					incAbsorb = {
+						order = 3.5,
+						type = "group",
+						inline = false,
+						name = L["Incoming absorbs"],
+						hidden = function(info) return ShadowUF.Units.zoneUnits[info[2]] or hideRestrictedOption(info) end,
+						disabled = function(info) return not getVariable(info[2], "healthBar", nil, "enabled") end,
+						args = {
+							heals = {
+								order = 1,
+								type = "toggle",
+								name = L["Show incoming absorbs"],
+								desc = L["Adds a bar inside the health bar indicating how much damage will be absorbed."],
+								arg = "incAbsorb.enabled",
+								hidden = false,
+								set = function(info, value)
+									setUnit(info, value)
+									setDirectUnit(info[2], "incAbsorb", nil, "enabled", getVariable(info[2], "incAbsorb", nil, "enabled"))
+								end
+							},
+							cap = {
+								order = 3,
+								type = "range",
+								name = L["Outside bar limit"],
+								desc = L["Percentage value of how far outside the unit frame the incoming absorb bar can go. 130% means it will go 30% outside the frame, 100% means it will not go outside."],
+								min = 1, max = 1.50, step = 0.05, isPercent = true,
+								arg = "incAbsorb.cap",
+								hidden = false,
+							},
 						},
 					},
 					totemBar = {

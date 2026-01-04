@@ -45,6 +45,7 @@ modules\power.lua
 modules\portrait.lua
 modules\indicators.lua
 modules\incheal.lua
+modules\incabsorb.lua
 modules\xp.lua
 modules\cast.lua
 modules\auras.lua
