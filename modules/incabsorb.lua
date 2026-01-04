@@ -1,5 +1,7 @@
 local IncAbsorb = setmetatable({["frameKey"] = "incAbsorb", ["colorKey"] = "incAbsorb", ["frameLevelMod"] = 3}, {__index = ShadowUF.IncHeal})
-ShadowUF:RegisterModule(IncAbsorb, "incAbsorb", ShadowUF.L["Incoming absorbs"])
+if (LE_EXPANSION_LEVEL_CURRENT >= 3) then
+	ShadowUF:RegisterModule(IncAbsorb, "incAbsorb", ShadowUF.L["Incoming absorbs"])
+end
 
 function IncAbsorb:OnEnable(frame)
 	frame.incAbsorb = frame.incAbsorb or ShadowUF.Units:CreateBar(frame)
