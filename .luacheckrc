@@ -45,6 +45,7 @@ read_globals = {
 	-- API functions
 	"C_AddOns",
 	"C_PartyInfo",
+	"C_Reputation",
 	"C_Timer",
 	"CancelUnitBuff",
 	"CanHearthAndResurrectFromArea",
