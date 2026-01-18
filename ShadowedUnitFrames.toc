@@ -1,5 +1,4 @@
-## Interface: 50500, 50501
-## Interface-Vanilla: 11507
+## Interface: 11508,20505,50503
 ## Title: Shadowed Unit Frames
 ## Notes: Moooooooooooooooooo
 ## Author: Shadowed
@@ -16,10 +15,8 @@ libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 libs\LibSharedMedia-3.0\lib.xml
 libs\AceDB-3.0\AceDB-3.0.xml
 libs\LibSpellRange-1.0\lib.xml
-#@version-classic@
-libs\LibClassicDurations\LibClassicDurations.xml
-libs\LibClassicCasterino\LibClassicCasterino.lua
-#@end-version-classic@
+libs\LibClassicDurations\LibClassicDurations.xml [AllowLoadGameType vanilla]
+libs\LibClassicCasterino\LibClassicCasterino.lua [AllowLoadGameType vanilla]
 libs\UTF8\utf8.lua
 #@end-no-lib-strip@
 

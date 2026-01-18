@@ -1,5 +1,4 @@
-## Interface: 50500, 50501
-## Interface-Vanilla: 11507
+## Interface: 11508,20505,50503
 ## Title: Shadowed UF (Options)
 ## Notes: Configuration for Shadowed Unit Frames.
 ## Author: Shadowed
