@@ -158,6 +158,7 @@ read_globals = {
 	"MageArcaneChargesFrame",
 	"MonkHarmonyBarFrame",
 	"PaladinPowerBarFrame",
+	"PartyFrame",
 	"PetCastingBarFrame",
 	"PetFrame",
 	"PlayerFrame",
